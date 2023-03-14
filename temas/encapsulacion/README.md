@@ -46,7 +46,7 @@ print(persona.edad)  # Output: 27
 print(persona.__nombre)  # Error: AttributeError: 'Persona' object has no attribute '__nombre'
 ```
 
-En este ejemplo, el atributo nombre se declara como privado con el doble guion bajo (`__nombre`) y se accede a él a través de los métodos `get_nombre` y `set_nombre`. El atributo edad es público y se puede acceder directamente.
+En este ejemplo, el atributo nombre se declara como privado con el doble guion bajo (`__nombre`) y se accede a él a través de los métodos `get_nombre()` y `set_nombre()`. El atributo edad es público y se puede acceder directamente.
 
 Cuando se intenta acceder al atributo privado `__nombre` directamente, se produce un error de `AttributeError`. Esto demuestra que la encapsulación se está aplicando correctamente en el código.
 
