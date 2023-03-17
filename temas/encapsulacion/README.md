@@ -50,6 +50,10 @@ En este ejemplo, el atributo nombre se declara como privado con el doble guion b
 
 Cuando se intenta acceder al atributo privado `__nombre` directamente, se produce un error de `AttributeError`. Esto demuestra que la encapsulación se está aplicando correctamente en el código.
 
+## Conclusiones
+
+En conclusión, en este ejemplo se cumple el principio de encapsulación, ya que los atributos y métodos privados solo se pueden acceder desde dentro del objeto. Esto permite ocultar los detalles de implementación de un objeto y reducir el acoplamiento entre los objetos, lo que cumple con el objetivo de la encapsulación como patrón de diseño.
+
 ## Instrucciones de ejecución
 
 Para ejecutar el código anterior, sitúese en la carpeta python y ejecute el siguiente comando:
