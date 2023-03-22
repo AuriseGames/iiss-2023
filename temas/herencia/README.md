@@ -12,48 +12,47 @@ La herencia en Python se puede lograr utilizando la palabra clave class seguida 
 
 Aquí hay un ejemplo de cómo se podría implementar la herencia en Python:
 
-#### `vehiculo.py`
+#### `animal.py`
 
 ```python
-class Vehiculo:
-    def __init__(self, marca, modelo):
-        self.marca = marca
-        self.modelo = modelo
+class Animal:
+    def hacer_sonido(self):
+        pass
 
-    def get_marca(self):
-        return self.marca
 
-    def get_modelo(self):
-        return self.modelo
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
 
-class Coche(Vehiculo):
-    def __init__(self, marca, modelo, velocidad_maxima):
-        super().__init__(marca, modelo)
-        self.velocidad_maxima = velocidad_maxima
 
-    def get_velocidad_maxima(self):
-        return self.velocidad_maxima
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
 
-coche = Coche("Ford", "Mustang", 250)
-print(coche.get_marca())  # Output: "Ford"
-print(coche.get_modelo())  # Output: "Mustang"
-print(coche.get_velocidad_maxima())  # Output: 250
+
+def escuchar_animal(animal):
+    print(animal.hacer_sonido())
+
+
+perro = Perro()
+escuchar_animal(perro)
+
+gato = Gato()
+escuchar_animal(gato)
 ```
 
-En este ejemplo, la clase `Coche` hereda los atributos y métodos de la clase `Vehiculo` mediante la línea `class Coche(Vehiculo):`. Además, añade su propio atributo `velocidad_maxima` y el método `get_velocidad_maxima()`.
+Este código define una clase base `Animal` con un método `hacer_sonido` que no hace nada. Las clases `Perro` y `Gato` heredan de `Animal` y sobrescriben el método `hacer_sonido` para devolver el sonido que hace cada animal.
 
-La función `super().__init__(marca, modelo)` llama al constructor de la clase base `Vehiculo` y establece los valores de `marca` y `modelo`.
-
-Cuando se crea un objeto `Coche`, se pueden llamar a los métodos `get_marca()`, `get_modelo()` y `get_velocidad_maxima()` para obtener los valores de los atributos correspondientes.
 
 ## Conclusiones
 
-En conclusión, en este ejemplo se cumple el principio LSP, ya que los objetos de la clase `Coche` pueden ser utilizados en lugar de objetos de la clase `Vehiculo` sin cambiar el comportamiento del programa. Además, se añade una funcionalidad adicional a la clase `Coche` a través del atributo `velocidad_maxima` y el método `get_velocidad_maxima()`, lo cual no afecta al comportamiento de la clase base `Vehiculo`.
+La función `escuchar_animal` toma un objeto de tipo `Animal` (o una subclase de `Animal`) y lo usa para imprimir el sonido que hace. Como las clases `Perro` y `Gato` son subclases de `Animal`, podemos pasar objetos de tipo `Perro` o `Gato` a la función `escuchar_animal` y el código seguirá funcionando correctamente. Esto demuestra que el código respeta el principio de sustitución de Liskov (LSP).
+
 
 ## Instrucciones de ejecución
 
 Para ejecutar el código anterior, sitúese en la carpeta python y ejecute el siguiente comando:
 
 ```bash
-py vehiculo.py
+py animal.py
 ```
