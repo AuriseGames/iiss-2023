@@ -2,9 +2,9 @@
 
 ## Definición
 
-La delegación es un patrón de diseño que se utiliza en programación orientada a objetos para permitir que un objeto pase ciertas responsabilidades a otro objeto. En lugar de realizar todas las tareas por sí solo, el objeto delega algunas de ellas a otros objetos especializados.
+La delegación es un principio de diseño en programación orientada a objetos que permite que un objeto pase ciertas responsabilidades a otro objeto. En lugar de realizar todas las tareas por sí solo, el objeto delega algunas de ellas a otros objetos especializados.
 
-La delegación se utiliza para simplificar la estructura de un objeto y reducir su complejidad, así como para permitir una mayor flexibilidad en la organización y distribución de tareas en un programa.
+Es un principio fundamental en la construcción de sistemas de software y es un mecanismo importante que permite la reutilización de código. La delegación se utiliza para simplificar la estructura de un objeto y reducir su complejidad, así como para permitir una mayor flexibilidad en la organización y distribución de tareas en un programa.
 
 ## Delegación en Python
 
