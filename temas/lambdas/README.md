@@ -32,7 +32,7 @@ En este ejemplo, se define una lista de números y se utiliza la función `map()
 
 ## Conclusiones
 
-Las lambdas son una herramienta útil para la programación funcional en Python, ya que permiten crear funciones pequeñas y anónimas de forma rápida y sencilla. Se utilizan comúnmente en funciones como map(), filter() y reduce() para aplicar una función sobre cada elemento de una lista o iterable.
+Las lambdas son una herramienta útil para la programación funcional en Python, ya que permiten crear funciones pequeñas y anónimas de forma rápida y sencilla. Se utilizan comúnmente en funciones como `map()`, `filter()` y `reduce()` para aplicar una función sobre cada elemento de una lista o iterable.
 
 Es importante tener en cuenta que las lambdas tienen ciertas limitaciones, como no poder contener declaraciones condicionales o bucles, lo que puede limitar su capacidad para realizar tareas más complejas. En estos casos, es recomendable utilizar funciones definidas de manera convencional.
 
