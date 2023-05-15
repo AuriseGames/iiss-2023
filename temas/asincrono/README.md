@@ -6,7 +6,7 @@ La asincronía es un paradigma de programación que permite la ejecución de tar
 
 ## Asincronía en Python
 
-En Python, la asincronía se logra mediante el uso de corutinas y el módulo `asyncio`. Las corutinas son funciones que pueden ser suspendidas y reanudadas en cualquier momento, permitiendo la ejecución no bloqueante de tareas. El módulo asyncio proporciona un bucle de eventos que permite la planificación y ejecución de múltiples tareas en un solo proceso.
+En Python, la asincronía se logra mediante el uso de hilos y el módulo `asyncio`. El módulo asyncio proporciona un bucle de eventos que permite la planificación y ejecución de múltiples tareas en un solo proceso.
 
 #### `asincronia.py`
 
@@ -33,12 +33,12 @@ async def main():
 asyncio.run(main())
 ```
 
-En este ejemplo, se definen dos corutinas, `foo` y `bar`. Luego se crea un objeto `task` para cada corutina mediante la función `asyncio.create_task`. Finalmente, se ejecutan ambas tareas mediante la llamada a `await` en la función `main`.
+En este ejemplo, se definen dos hilos, `foo` y `bar`. Luego se crea un objeto `task` para cada hilo mediante la función `asyncio.create_task`. Finalmente, se ejecutan ambas tareas mediante la llamada a `await` en la función `main`.
 
 
 ## Conclusiones
 
-La asincronía es muy útil en situaciones en las que se necesitan realizar tareas que pueden tardar un tiempo indeterminado en completarse, como la lectura y escritura de archivos o el acceso a una base de datos remota. En Python, se logra mediante el uso de corutinas y el módulo asyncio, lo que permite una ejecución no bloqueante y una gestión eficiente de tareas en un solo proceso.
+La asincronía es muy útil en situaciones en las que se necesitan realizar tareas que pueden tardar un tiempo indeterminado en completarse, como la lectura y escritura de archivos o el acceso a una base de datos remota. En Python, se logra mediante el uso de hilos y el módulo asyncio, lo que permite una ejecución no bloqueante y una gestión eficiente de tareas en un solo proceso.
 
 ## Instrucciones de ejecución
 
