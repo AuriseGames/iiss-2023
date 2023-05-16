@@ -13,27 +13,31 @@ En Python, la asincronía se logra mediante el uso de hilos y el módulo `asynci
 ```python
 import asyncio
 
-async def foo():
-    print('Comenzando foo')
-    await asyncio.sleep(1)
-    print('Terminando foo')
-
-async def bar():
-    print('Comenzando bar')
-    await asyncio.sleep(2)
-    print('Terminando bar')
+async def descarga_archivo(url, nombre, tamanio):
+    print(f"Descargando {url}...")
+    await asyncio.sleep(size)  # Simulamos la descarga con una espera de 1 segundo por cada MB
+    print(f"Archivo {filename} descargado")
 
 async def main():
-    task1 = asyncio.create_task(foo())
-    task2 = asyncio.create_task(bar())
+    archivos = [
+        ("https://ejemplo.com/archivo1.txt", "archivo1.txt", 3),
+        ("https://ejemplo.com/archivo2.txt", "archivo2.txt", 2),
+        ("https://ejemplo.com/archivo3.txt", "archivo3.txt", 1)
+    ]
 
-    await task1
-    await task2
+    hilos = []
+    for url, nombre, tamanio in archivos:
+        hilo = asyncio.create_task(descarga_archivo(url, nombre, tamanio))
+        hilos.append(hilo)
+
+    await asyncio.gather(*hilos)
 
 asyncio.run(main())
 ```
 
-En este ejemplo, se definen dos hilos, `foo` y `bar`. Luego se crea un objeto `task` para cada hilo mediante la función `asyncio.create_task`. Finalmente, se ejecutan ambas tareas mediante la llamada a `await` en la función `main`.
+En este ejemplo, se simula la descarga de tres archivos de diferentes tamaños. Para ello, se crea una función `descarga_archivo` que recibe la URL del archivo, el nombre del archivo y el tamaño del archivo en MB. Esta función imprime un mensaje indicando que se está descargando el archivo, espera un tiempo determinado y luego imprime un mensaje indicando que el archivo se ha descargado.
+
+Para comprobar que los tres hilos se ejecutan al mismo tiempo, se le asigna un mayor tiempo de espera al primer archivo, y un menor tiempo de espera a los otros dos archivos consecutivamente. Si los hilos se ejecutan de forma secuencial, el primer archivo se descargará primero, y luego los otros dos archivos en orden. Sin embargo, si los hilos se ejecutan de forma asíncrona, los tres archivos se descargarán al mismo tiempo, y finaliza primero el archivo que tiene un menor tamaño.
 
 
 ## Conclusiones
