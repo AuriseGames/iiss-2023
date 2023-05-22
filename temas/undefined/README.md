@@ -6,36 +6,38 @@ Undefined es un valor que se le puede asignar a una variable cuando no ha sido i
 
 ## Undefined en Python
 
-En Python, no existe el concepto de `undefined`. Sin embargo, se puede simular usando `None`.
+En Python, no existe el concepto de `undefined`. Sin embargo, se puede simular usando `None`. También existe `Optional`, que es un tipo de dato que puede ser `None` o un valor de otro tipo. En el siguiente ejemplo, se muestra cómo simular `undefined` usando `None` y `Optional`:
 
-#### `informacion.py`
-
+#### `stream.py`
 ```python
-# Funcion que devuelve la informacion de una persona o None si no se encuentra
-def obtener_informacion_persona(nombre):
-    if nombre == "Juan":
-        return {
-            "nombre": "Juan",
-            "edad": 25,
-            "ocupacion": "Estudiante"
-        }
+from typing import Optional
+
+def get_next_value(stream) -> Optional[int]:
+    # Simulación de lectura de un stream
+    # Devuelve None si no hay más valores en el stream
+    if stream:
+        return stream.pop(0)
     else:
         return None
 
-# Solicita el nombre de una persona
-nombre_persona = input("Ingresa un nombre: ")
-informacion = obtener_informacion_persona(nombre_persona)
-
-# Comprueba si la información es None
-if informacion is None:
-    print("No se encontró información para la persona", nombre_persona)
-else:
-    print("Información de", informacion["nombre"])
-    print("Edad:", informacion["edad"])
-    print("Ocupación:", informacion["ocupacion"])
+# Procesa un stream de valores. Si el valor es None, se ignorará. Cuando no haya más valores, se terminará la ejecución
+def process_stream(stream):
+    while True:
+        value = get_next_value(stream)
+        if value is not None:
+            # Realizar algún procesamiento con el valor
+            print(value * 2)
+        else:
+            # No hay más valores en el stream
+            if not stream:
+                break
+        
+# Ejemplo de uso
+my_stream = [1, 2, 3, None, 4, 5, None, 6, 7]
+process_stream(my_stream)
 ```
 
-En este ejemplo, se simula el concepto de `undefined` usando `None`. La función `obtener_informacion_persona` devuelve `None` si no se encuentra información para el nombre de la persona. En caso contrario, devuelve un diccionario con la información de la persona.
+En este ejemplo se simula un stream de datos que se lee de forma secuencial. El stream puede contener valores de tipo `int` o `None`. La función `process_stream` lee el stream y realiza algún procesamiento con cada valor. Si se alcanza el final del stream, se termina la ejecución. Si se encuentra un valor `None`, se ignora y se continúa con el siguiente valor.
 
 ## Conclusiones
 
@@ -46,5 +48,5 @@ El uso de `undefined` es muy útil, ya que permite diferenciar entre una variabl
 Para ejecutar el código anterior, sitúese en la carpeta python y ejecute el siguiente comando:
 
 ```bash
-py informacion.py
+py stream.py
 ```
