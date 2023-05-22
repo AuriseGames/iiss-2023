@@ -10,73 +10,36 @@ Un observable en Python es una secuencia de valores que se emiten a lo largo del
 
 Para el siguiente ejemplo, se utilizará la librería rx de Python, que es una implementación de ReactiveX en Python.
 
-#### `parimpar.py`
+#### `observable.py`
 
 ```python
-from rx import create
+import random
+import rx
+from rx import operators as ops
 
-# Definir una función que emite números pares
-def emitir_numeros_pares(observer, scheduler):
-    try:
-        for i in range(0, 10, 2):
-            observer.on_next(i)
-        observer.on_completed()
+def filternumbers(x):
+   if isinstance(x, int) and x % 2 == 0:
+      return x
+   else:
+      return None
 
-    except Exception as e:
-        observer.on_error(e)
+numbers = range(1, 11)
+source = rx.from_(numbers)
 
-# Definir una función que emite números impares
-def emitir_numeros_impares(observer, scheduler):
-    try:
-        for i in range(1, 10, 2):
-            observer.on_next(i)
-        # Simular un error lanzando una excepción
-        raise ValueError("Error simulado")
+case1 = source.pipe(
+   ops.filter(lambda c: filternumbers(c)),
+   ops.map(lambda a: a * 2),
+   ops.reduce(lambda acc, curr: acc + curr)
+)
 
-    except Exception as e:
-        observer.on_error(e)
-
-# Crear un observable a partir de la función
-observable1 = create(emitir_numeros_pares)
-observable2 = create(emitir_numeros_impares)
-
-# Definir los métodos de suscripción al observable
-def on_next(valor):
-    print(f'Se recibió el valor: {valor}')
-
-def on_completed():
-    print('Se completó la emisión de números pares')
-
-def on_error(error):
-    print(f'Se produjo un error: {error}')
-
-# Suscribirse al observable
-observable1.subscribe(on_next, on_error, on_completed)
-observable2.subscribe(on_next, on_error, on_completed)
+case1.subscribe(
+   on_next=lambda i: print("Got - {0}".format(i)),
+   on_error=lambda e: print("Error: {0}".format(e)),
+   on_completed=lambda: print("Job Done!"),
+)
 ```
 
-En este ejemplo creamos dos observables (`observable1` y `observable2`) a partir de dos funciones que emiten números pares e impares respectivamente. Luego, nos suscribimos a cada observable para recibir los valores emitidos. En este caso, los valores emitidos son números enteros, pero podrían ser cualquier tipo de dato, como cadenas, objetos, etc.
-
-La salida del programa es la siguiente:
-
-```bash
-Se recibió el valor: 0
-Se recibió el valor: 2
-Se recibió el valor: 4
-Se recibió el valor: 6
-Se recibió el valor: 8
-Se completó la emisión de números pares
-Se recibió el valor: 1
-Se recibió el valor: 3
-Se recibió el valor: 5
-Se recibió el valor: 7
-Se recibió el valor: 9
-Se produjo un error: Error simulado
-```
-
-Las funciones `on_next`, `on_completed` y `on_error` son los métodos de suscripción al observable. El método `on_next` se ejecuta cada vez que se emite un nuevo valor, el método `on_completed` se ejecuta cuando se completa la emisión de valores y el método `on_error` se ejecuta cuando se produce un error.
-
-Las dos ultimas funciones son excluyentes entre sí, es decir, si se ejecuta el método `on_completed`, no se ejecuta el método `on_error` y viceversa. Por lo tanto, si se produce un error, el método `on_completed` no se ejecuta.
+En el ejemplo anterior, se crea un observable a partir de una lista de números. Luego, se aplica una serie de operadores para filtrar los números pares, multiplicarlos por 2 y sumarlos. Finalmente, se suscribe una función que imprime el resultado de la operación.
 
 ## Conclusiones
 
@@ -93,5 +56,5 @@ pip install rx
 Una vez instalada, sitúese en la carpeta python y ejecute el siguiente comando:
 
 ```bash
-py parimpar.py
+py observable.py
 ```
