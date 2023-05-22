@@ -12,36 +12,34 @@ En Python, no existe el concepto de `undefined`. Sin embargo, se puede simular u
 ```python
 from typing import Optional
 
-def get_next_value(stream) -> Optional[int]:
-    # Simulación de lectura de un stream
-    # Devuelve None si no hay más valores en el stream
-    if stream:
-        return stream.pop(0)
-    else:
+
+def process_stream(stream):
+    for number in stream:
+        num = parse_number(number)
+        if num is not None:
+            print(num)
+        else:
+            print("ERROR")
+            break
+
+
+def parse_number(number) -> Optional[int]:
+    try:
+        return int(number)
+    except ValueError:
         return None
 
-# Procesa un stream de valores. Si el valor es None, se ignorará. Cuando no haya más valores, se terminará la ejecución
-def process_stream(stream):
-    while True:
-        value = get_next_value(stream)
-        if value is not None:
-            # Realizar algún procesamiento con el valor
-            print(value * 2)
-        else:
-            # No hay más valores en el stream
-            if not stream:
-                break
-        
+
 # Ejemplo de uso
-my_stream = [1, 2, 3, None, 4, 5, None, 6, 7]
-process_stream(my_stream)
+stream = ['1', '2', '3', 'a', '4', '5']
+process_stream(stream)
 ```
 
-En este ejemplo se simula un stream de datos que se lee de forma secuencial. El stream puede contener valores de tipo `int` o `None`. La función `process_stream` lee el stream y realiza algún procesamiento con cada valor. Si se alcanza el final del stream, se termina la ejecución. Si se encuentra un valor `None`, se ignora y se continúa con el siguiente valor.
+En este ejemplo, se recibe un stream de datos, que deberían ser números. Si se recibe un dato que no es un número, se imprime `ERROR` y se termina el proceso. Si se recibe un número, se imprime el número. La gracia de usar `Optional` es que se puede saber si el número es `None` o no, y así diferenciar entre un número y un error.
 
 ## Conclusiones
 
-El uso de `undefined` es muy útil, ya que permite diferenciar entre una variable que no ha sido inicializada y una variable que no tiene valor. La mayoría de lenguajes de programación cuentan con este concepto, aunque con diferentes nombres. En Python, se puede simular usando `None`.
+El uso de `undefined` es muy útil, ya que permite diferenciar entre una variable que no ha sido inicializada y una variable que no tiene valor. La mayoría de lenguajes de programación cuentan con este concepto, aunque con diferentes nombres. En Python, se puede simular usando `None`. Una pega del uso de Optionals es que no sabremos la causa del error al usar varios Optionals uno detrás de otro. Por ejemplo, si se usa un Optional para parsear un número, y luego se usa otro para dividirlo entre 2, si el número es `None`, no sabremos si es porque el número no se pudo parsear, o porque el número era `None` desde un principio.
 
 ## Instrucciones de ejecución
 
